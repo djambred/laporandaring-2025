@@ -21,3 +21,11 @@ Livewire::setScriptRoute(function ($handle) {
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Absensi Routes (Public - untuk mahasiswa)
+Route::prefix('absensi')->name('absensi.')->group(function () {
+    Route::get('/', [App\Http\Controllers\AbsensiController::class, 'index'])->name('index');
+    Route::get('/create/{jadwal}', [App\Http\Controllers\AbsensiController::class, 'create'])->name('create');
+    Route::post('/store', [App\Http\Controllers\AbsensiController::class, 'store'])->name('store');
+    Route::get('/riwayat', [App\Http\Controllers\AbsensiController::class, 'riwayat'])->name('riwayat');
+});
