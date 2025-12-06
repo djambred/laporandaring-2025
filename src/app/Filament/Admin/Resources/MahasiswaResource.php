@@ -32,10 +32,10 @@ class MahasiswaResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('npm')
-                    ->label('NPM')
-                    ->required()
+                    ->label('NPM (Opsional)')
                     ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder('Kosongkan jika tidak ada'),
                 Forms\Components\TextInput::make('email')
                     ->label('Email')
                     ->email()
