@@ -16,8 +16,7 @@ class AbsensiController extends Controller
             'jadwal_id' => 'required|exists:jadwals,id',
             'npm' => 'nullable|string',
             'nama' => 'required|string|max:255',
-            'keterangan' => 'nullable|string',
-            'foto_absen' => 'nullable|image|max:2048',
+            'status' => 'required|in:hadir,izin,sakit',
         ]);
 
         try {
@@ -45,21 +44,12 @@ class AbsensiController extends Controller
                 return back()->with('error', 'Anda sudah melakukan absensi untuk jadwal ini!');
             }
 
-            // Simpan foto jika ada
-            $fotoPath = null;
-            if ($request->hasFile('foto_absen')) {
-                $fotoPath = $request->file('foto_absen')->store('absensi-foto', 'public');
-            }
-
             // Buat absensi
             Absensi::create([
                 'jadwal_id' => $validated['jadwal_id'],
                 'mahasiswa_id' => $mahasiswa->id,
-                'status' => $request->input('status', 'hadir'),
+                'status' => $validated['status'],
                 'waktu_absen' => now(),
-                'keterangan' => $validated['keterangan'],
-                'foto_absen' => $fotoPath,
-                'lokasi' => $request->input('lokasi'), // GPS dari browser
             ]);
 
             return redirect('/')->with('success', 'Absensi berhasil dicatat!');

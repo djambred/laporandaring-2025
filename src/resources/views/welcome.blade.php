@@ -97,10 +97,9 @@
 
                             <h3 class="font-semibold text-lg mb-4 text-gray-800">Form Absensi</h3>
 
-                            <form action="{{ route('absensi.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('absensi.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="jadwal_id" value="{{ $jadwal->id }}">
-                                <input type="hidden" name="lokasi" id="lokasi{{ $jadwal->id }}">
 
                                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
                                     <div class="flex items-start gap-2">
@@ -137,29 +136,8 @@
                                     </select>
                                 </div>
 
-                                {{-- <div class="mb-3">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                                        Foto (Opsional)
-                                    </label>
-                                    <input type="file" name="foto_absen" accept="image/*" class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                                    <p class="text-xs text-gray-500 mt-1">Upload foto sebagai bukti kehadiran</p>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                                        Keterangan
-                                    </label>
-                                    <textarea name="keterangan" placeholder="Keterangan tambahan (opsional)" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
-                                </div>
-
-                                <div class="alert alert-warning mb-4">
-                                    <i class="bi bi-geo-alt-fill"></i>
-                                    <span class="text-sm">Lokasi Anda akan otomatis terdeteksi</span>
-                                </div> --}}
-
-                                <div class="modal-action">
-                                    <button type="button" onclick="modal{{ $jadwal->id }}.close()" class="btn btn-ghost">Batal</button>
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="mt-6">
+                                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-200">
                                         <i class="bi bi-send-fill mr-2"></i>Submit Absensi
                                     </button>
                                 </div>
@@ -187,35 +165,6 @@
         </div>
     </footer>
 
-    <script>
-        // Auto-detect location when modal opens
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all modal buttons
-            const modalButtons = document.querySelectorAll('[onclick^="modal"]');
 
-            modalButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Extract modal ID from onclick attribute
-                    const onclickAttr = this.getAttribute('onclick');
-                    const modalId = onclickAttr.match(/modal(\d+)/)[1];
-                    const lokasiInput = document.getElementById('lokasi' + modalId);
-
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(
-                            function(position) {
-                                const lat = position.coords.latitude;
-                                const lng = position.coords.longitude;
-                                lokasiInput.value = lat + ',' + lng;
-                            },
-                            function(error) {
-                                console.log('Geolocation error:', error);
-                                lokasiInput.value = 'Location not available';
-                            }
-                        );
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
