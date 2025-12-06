@@ -5,18 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ str_replace(' ', '-', $jadwal->dosen->nama) }}_{{ str_replace(' ', '-', $jadwal->matakuliah->nama) }}_{{ $jadwal->tanggal->format('Y-m-d') }}</title>
     <style>
-        @media print {
-            .no-print {
-                display: none;
-            }
-            .dokumentasi-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .page-break {
-                page-break-after: always;
-            }
+        @page {
+        size: A4;
+        margin: 18mm; /* Margin aman untuk semua printer */
+    }
+
+    @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;
         }
+
+        .no-print {
+            display: none !important;
+        }
+
+        .dokumentasi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+    }
+
 
         body {
             font-family: Arial, sans-serif;
