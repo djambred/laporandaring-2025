@@ -137,21 +137,42 @@
             border-top: 1px solid #ddd;
         }
 
-        .signature-section {
+        /* Signature layout improvements */
+        .signature-wrapper {
             display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
+            justify-content: flex-end; /* taruh di kanan */
+            margin-top: 40px;
+            margin-right: 50px;
         }
 
         .signature-box {
-            width: 45%;
+            width: 340px; /* lebar tetap supaya rapi */
             text-align: center;
+            /* pastikan tidak overflow pada cetak */
+            page-break-inside: avoid;
+        }
+
+        .signature-label {
+            margin: 0 0 10px 0;
+            font-weight: normal;
+        }
+
+        .signature-img {
+            display: block;
+            margin: 10px auto;
+            max-width: 260px;
+            max-height: 140px;
+            width: auto;
+            height: auto;
         }
 
         .signature-line {
-            margin-top: 80px;
             border-top: 1px solid #000;
             padding-top: 5px;
+            margin-top: 10px;
+            display: inline-block;
+            min-width: 250px;
+            text-align: center;
         }
 
         .print-btn {
@@ -202,6 +223,13 @@
             font-size: 10px;
             color: #666;
             font-style: italic;
+        }
+
+        /* small helper to reserve space if no signature */
+        .signature-placeholder {
+            display: block;
+            height: 120px;
+            width: 100%;
         }
     </style>
 </head>
@@ -298,19 +326,30 @@
     </div>
 
     <div class="footer">
-        <div style="text-align: right; margin-top: 40px; margin-right: 50px;">
-            <p style="margin: 5px 0;">Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</p>
-            <p style="margin-top: 20px; margin-bottom: 10px;">Dosen Pengampu</p>
-            @if($jadwal->dosen->tanda_tangan)
-                <div style="margin: 20px 0; text-align: right;">
+        <!-- tanggal di sebelah kanan -->
+        <div class="signature-wrapper">
+            <div class="signature-box">
+                <p style="margin: 5px 0;">
+                    Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
+                </p>
+
+                <p class="signature-label" style="margin-top: 20px; margin-bottom: 6px;">Dosen Pengampu</p>
+
+                @if($jadwal->dosen->tanda_tangan)
                     <img src="{{ $jadwal->dosen->tanda_tangan }}"
                          alt="Tanda Tangan"
-                         style="max-width: 350px; max-height: 500px; width: auto; height: auto; display: inline-block;">
+                         class="signature-img">
+                @else
+                    <!-- placeholder agar tinggi tetap konsisten -->
+                    <span class="signature-placeholder" aria-hidden="true"></span>
+                @endif
+
+                <div class="signature-line">
+                    <strong style="display:block;">{{ $jadwal->dosen->nama }}</strong>
+                    <span style="font-size: 11px; font-weight: normal; display:block; margin-top:4px;">
+                        NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
+                    </span>
                 </div>
-            @endif
-            <div style="border-top: 1px solid #000; padding-top: 5px; display: inline-block; min-width: 250px; text-align: center;">
-                <strong>{{ $jadwal->dosen->nama }}</strong><br>
-                <span style="font-size: 11px; font-weight: normal;">NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}</span>
             </div>
         </div>
 
