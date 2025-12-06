@@ -325,23 +325,61 @@
     @endif
 
     <!-- Dokumentasi Perkuliahan -->
-    @if($jadwal->dokumentasi && count($jadwal->dokumentasi) > 0)
-        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #333; text-align: center;">
-            DOKUMENTASI PERKULIAHAN
+    @if($jadwal->dokumentasi_pre || $jadwal->dokumentasi_whilst_1 || $jadwal->dokumentasi_whilst_2 || $jadwal->dokumentasi_post)
+        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #333; text-align: left;">
+            Dokumentasi:
         </h3>
 
-        <div class="dokumentasi-grid">
-            @foreach($jadwal->dokumentasi as $index => $foto)
-                <div class="dokumentasi-item">
-                    <img src="{{ asset('storage/' . $foto) }}"
-                         alt="Dokumentasi {{ $index + 1 }}"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
-                    <p class="dokumentasi-caption">
-                        Foto {{ $index + 1 }}
-                    </p>
-                </div>
-            @endforeach
-        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <tr>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Pre</div>
+                    @if($jadwal->dokumentasi_pre)
+                        <img src="{{ asset('storage/' . $jadwal->dokumentasi_pre) }}"
+                             alt="Dokumentasi Pre"
+                             style="width: 100%; height: auto; display: block;"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
+                    @else
+                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                    @endif
+                </td>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Whilst</div>
+                    @if($jadwal->dokumentasi_whilst_1)
+                        <img src="{{ asset('storage/' . $jadwal->dokumentasi_whilst_1) }}"
+                             alt="Dokumentasi Whilst 1"
+                             style="width: 100%; height: auto; display: block;"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
+                    @else
+                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Whilst</div>
+                    @if($jadwal->dokumentasi_whilst_2)
+                        <img src="{{ asset('storage/' . $jadwal->dokumentasi_whilst_2) }}"
+                             alt="Dokumentasi Whilst 2"
+                             style="width: 100%; height: auto; display: block;"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
+                    @else
+                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                    @endif
+                </td>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Post</div>
+                    @if($jadwal->dokumentasi_post)
+                        <img src="{{ asset('storage/' . $jadwal->dokumentasi_post) }}"
+                             alt="Dokumentasi Post"
+                             style="width: 100%; height: auto; display: block;"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
+                    @else
+                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                    @endif
+                </td>
+            </tr>
+        </table>
     @endif
 
     <!-- Catatan -->

@@ -62,24 +62,74 @@ class JadwalResource extends Resource
                     ->helperText('Jika aktif, jadwal ini akan muncul di halaman absensi mahasiswa')
                     ->default(false)
                     ->inline(false),
-                Forms\Components\FileUpload::make('dokumentasi')
-                    ->label('Dokumentasi Perkuliahan')
-                    ->helperText('Upload screenshot/foto saat mengajar (bisa multiple)')
-                    ->multiple()
-                    ->image()
-                    ->imageEditor()
-                    ->imageEditorAspectRatios([
-                        null,
-                        '16:9',
-                        '4:3',
+
+                Forms\Components\Section::make('Dokumentasi Perkuliahan')
+                    ->description('Upload dokumentasi sesuai tahapan perkuliahan')
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\FileUpload::make('dokumentasi_pre')
+                                    ->label('Pre (Sebelum Kuliah)')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        null,
+                                        '16:9',
+                                        '4:3',
+                                    ])
+                                    ->maxSize(5120)
+                                    ->directory('dokumentasi-perkuliahan')
+                                    ->visibility('public')
+                                    ->downloadable()
+                                    ->openable(),
+
+                                Forms\Components\FileUpload::make('dokumentasi_whilst_1')
+                                    ->label('Whilst 1 (Saat Kuliah)')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        null,
+                                        '16:9',
+                                        '4:3',
+                                    ])
+                                    ->maxSize(5120)
+                                    ->directory('dokumentasi-perkuliahan')
+                                    ->visibility('public')
+                                    ->downloadable()
+                                    ->openable(),
+
+                                Forms\Components\FileUpload::make('dokumentasi_whilst_2')
+                                    ->label('Whilst 2 (Saat Kuliah)')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        null,
+                                        '16:9',
+                                        '4:3',
+                                    ])
+                                    ->maxSize(5120)
+                                    ->directory('dokumentasi-perkuliahan')
+                                    ->visibility('public')
+                                    ->downloadable()
+                                    ->openable(),
+
+                                Forms\Components\FileUpload::make('dokumentasi_post')
+                                    ->label('Post (Setelah Kuliah)')
+                                    ->image()
+                                    ->imageEditor()
+                                    ->imageEditorAspectRatios([
+                                        null,
+                                        '16:9',
+                                        '4:3',
+                                    ])
+                                    ->maxSize(5120)
+                                    ->directory('dokumentasi-perkuliahan')
+                                    ->visibility('public')
+                                    ->downloadable()
+                                    ->openable(),
+                            ]),
                     ])
-                    ->maxFiles(10)
-                    ->maxSize(5120)
-                    ->directory('dokumentasi-perkuliahan')
-                    ->visibility('public')
-                    ->downloadable()
-                    ->openable()
-                    ->reorderable()
+                    ->collapsible()
                     ->columnSpanFull(),
             ]);
     }

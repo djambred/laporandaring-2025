@@ -12,9 +12,21 @@ class Jadwal extends Model
 
     protected $casts = [
         'tanggal' => 'date',
-        'dokumentasi' => 'array',
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Get all dokumentasi as array for compatibility
+     */
+    public function getDokumentasiAttribute()
+    {
+        return array_filter([
+            $this->dokumentasi_pre,
+            $this->dokumentasi_whilst_1,
+            $this->dokumentasi_whilst_2,
+            $this->dokumentasi_post,
+        ]);
+    }
 
     public function dosen(): BelongsTo
     {
