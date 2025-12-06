@@ -14,18 +14,27 @@ class AbsensiController extends Controller
     {
         $validated = $request->validate([
             'jadwal_id' => 'required|exists:jadwals,id',
-            'npm' => 'required|string',
+            'npm' => 'nullable|string',
             'nama' => 'required|string|max:255',
             'keterangan' => 'nullable|string',
             'foto_absen' => 'nullable|image|max:2048',
         ]);
 
         try {
-            // Cari atau buat mahasiswa berdasarkan NPM
-            $mahasiswa = Mahasiswa::firstOrCreate(
-                ['npm' => $validated['npm']],
-                ['nama' => $validated['nama']]
-            );
+            // Cari atau buat mahasiswa berdasarkan NPM (jika ada) atau nama
+            if (!empty($validated['npm'])) {
+                // Jika ada NPM, cari atau buat berdasarkan NPM
+                $mahasiswa = Mahasiswa::firstOrCreate(
+                    ['npm' => $validated['npm']],
+                    ['nama' => $validated['nama']]
+                );
+            } else {
+                // Jika tidak ada NPM, buat mahasiswa baru dengan nama saja
+                $mahasiswa = Mahasiswa::create([
+                    'nama' => $validated['nama'],
+                    'npm' => null,
+                ]);
+            }
 
             // Cek apakah sudah absen
             $existingAbsensi = Absensi::where('jadwal_id', $validated['jadwal_id'])

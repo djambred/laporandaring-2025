@@ -114,9 +114,9 @@
 
                                 <div class="mb-3">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">
-                                        NPM <span class="text-red-600">*</span>
+                                        NPM (Opsional)
                                     </label>
-                                    <input type="text" name="npm" placeholder="Masukkan NPM Anda" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                    <input type="text" name="npm" placeholder="Masukkan NPM Anda (jika ada)" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
 
                                 <div class="mb-3">
@@ -137,7 +137,7 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label class="block text-sm font-medium text-gray-700 mb-1">
                                         Foto (Opsional)
                                     </label>
@@ -155,7 +155,7 @@
                                 <div class="alert alert-warning mb-4">
                                     <i class="bi bi-geo-alt-fill"></i>
                                     <span class="text-sm">Lokasi Anda akan otomatis terdeteksi</span>
-                                </div>
+                                </div> --}}
 
                                 <div class="modal-action">
                                     <button type="button" onclick="modal{{ $jadwal->id }}.close()" class="btn btn-ghost">Batal</button>
