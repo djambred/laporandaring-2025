@@ -415,7 +415,6 @@
 
     <!-- Tanda Tangan -->
     <div class="footer" style="text-align: center; margin-top: 40px;">
-        <h4 style="margin-bottom: 10px;">Tanggal & Tanda Tangan Dosen</h4>
         <p style="margin: 5px 0;">
             Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
         </p>
