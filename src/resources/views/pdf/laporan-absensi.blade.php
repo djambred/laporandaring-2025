@@ -324,63 +324,84 @@
         </div>
     @endif
 
-    <!-- Dokumentasi Perkuliahan -->
+    <!-- Page Break untuk Halaman 2 -->
+    <div style="page-break-after: always;"></div>
+
+    <!-- Halaman 2: Dokumentasi Perkuliahan -->
     @if($jadwal->dokumentasi_pre || $jadwal->dokumentasi_whilst_1 || $jadwal->dokumentasi_whilst_2 || $jadwal->dokumentasi_post)
-        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #333; text-align: left;">
+        <!-- Header Halaman 2 -->
+        <div class="header">
+            <h1>LAPORAN PERKULIAHAN DARING</h1>
+        </div>
+
+        <h3 style="margin-top: 20px; margin-bottom: 15px; color: #333; text-align: left;">
             Dokumentasi:
         </h3>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; page-break-inside: avoid;">
             <tr>
-                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
-                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Pre</div>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 5px; padding: 3px; background: #f5f5f5; font-size: 11px;">Pre</div>
                     @if($jadwal->dokumentasi_pre)
                         <img src="{{ asset('storage/' . $jadwal->dokumentasi_pre) }}"
                              alt="Dokumentasi Pre"
-                             style="width: 100%; height: auto; display: block;"
+                             style="width: 100%; max-height: 250px; object-fit: contain; display: block;"
                              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
                     @else
-                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                        <div style="width: 100%; height: 150px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px;">Tidak ada gambar</div>
                     @endif
                 </td>
-                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
-                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Whilst</div>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 5px; padding: 3px; background: #f5f5f5; font-size: 11px;">Whilst</div>
                     @if($jadwal->dokumentasi_whilst_1)
                         <img src="{{ asset('storage/' . $jadwal->dokumentasi_whilst_1) }}"
                              alt="Dokumentasi Whilst 1"
-                             style="width: 100%; height: auto; display: block;"
+                             style="width: 100%; max-height: 250px; object-fit: contain; display: block;"
                              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
                     @else
-                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                        <div style="width: 100%; height: 150px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px;">Tidak ada gambar</div>
                     @endif
                 </td>
             </tr>
             <tr>
-                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
-                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Whilst</div>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 5px; padding: 3px; background: #f5f5f5; font-size: 11px;">Whilst</div>
                     @if($jadwal->dokumentasi_whilst_2)
                         <img src="{{ asset('storage/' . $jadwal->dokumentasi_whilst_2) }}"
                              alt="Dokumentasi Whilst 2"
-                             style="width: 100%; height: auto; display: block;"
+                             style="width: 100%; max-height: 250px; object-fit: contain; display: block;"
                              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
                     @else
-                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                        <div style="width: 100%; height: 150px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px;">Tidak ada gambar</div>
                     @endif
                 </td>
-                <td style="width: 50%; border: 1px solid #ddd; padding: 10px; vertical-align: top;">
-                    <div style="font-weight: bold; margin-bottom: 8px; padding: 5px; background: #f5f5f5;">Post</div>
+                <td style="width: 50%; border: 1px solid #ddd; padding: 8px; vertical-align: top;">
+                    <div style="font-weight: bold; margin-bottom: 5px; padding: 3px; background: #f5f5f5; font-size: 11px;">Post</div>
                     @if($jadwal->dokumentasi_post)
                         <img src="{{ asset('storage/' . $jadwal->dokumentasi_post) }}"
                              alt="Dokumentasi Post"
-                             style="width: 100%; height: auto; display: block;"
+                             style="width: 100%; max-height: 250px; object-fit: contain; display: block;"
                              onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' font-family=\'Arial\' font-size=\'18\'%3EGambar tidak tersedia%3C/text%3E%3C/svg%3E';">
                     @else
-                        <div style="width: 100%; height: 200px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999;">Tidak ada gambar</div>
+                        <div style="width: 100%; height: 150px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px;">Tidak ada gambar</div>
                     @endif
                 </td>
             </tr>
         </table>
+
+        <div style="text-align: center; margin-top: 10px;">
+            <p style="font-size: 12px; color: #666;">Halaman 2</p>
+        </div>
     @endif
+
+    <!-- Page Break untuk Halaman 3 -->
+    <div style="page-break-after: always;"></div>
+
+    <!-- Halaman 3: Catatan & Tanda Tangan -->
+    <!-- Header Halaman 3 -->
+    <div class="header">
+        <h1>LAPORAN PERKULIAHAN DARING</h1>
+    </div>
 
     <!-- Catatan -->
     <div style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #4CAF50;">
@@ -396,6 +417,7 @@
         </ol>
     </div>
 
+    <!-- Tanda Tangan -->
     <div class="footer" style="text-align: center; margin-top: 40px;">
         <h4 style="margin-bottom: 10px;">Tanggal & Tanda Tangan Dosen</h4>
         <p style="margin: 5px 0;">
@@ -421,6 +443,8 @@
                 NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
             </span>
         </div>
+
+        <p style="font-size: 12px; color: #666; margin-top: 30px;">Halaman 3</p>
     </div>
 
     <script>
