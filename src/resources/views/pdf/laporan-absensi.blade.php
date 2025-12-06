@@ -299,11 +299,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($jadwal->absensis->sortBy('mahasiswa.npm') as $index => $absensi)
+                @foreach($jadwal->absensis as $index => $absensi)
                     <tr>
                         <td style="text-align: center;">{{ $index + 1 }}</td>
                         <td>{{ $absensi->mahasiswa->nama }}</td>
-                        <td>{{ $absensi->mahasiswa->npm }}</td>
+                        <td>{{ $absensi->mahasiswa->npm ?? '-' }}</td>
                         <td style="text-align: center;">
                             @if($absensi->status === 'hadir')
                                 ✓
@@ -324,62 +324,9 @@
         </div>
     @endif
 
-    <!-- Catatan -->
-    <div style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #4CAF50;">
-        <h4 style="margin-top: 0;">Catatan:</h4>
-        <ol style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
-            <li>Dosen menyediakan link zoom perkuliahan dan mengundang mahasiswa dalam perkuliahan daring</li>
-            <li>Perkuliahan direkam (jika bisa) dan tangkap layar untuk dokumentasi</li>
-            <li>Perkuliahan dilaksanakan sesuai waktu kuliah luring atau disesuaikan dengan situasi</li>
-            <li>Dosen dapat mengisikan absensi pada BAP sesuai jam kuliah masing-masing</li>
-            <li>Dosen mengumpulkan pelaporan kuliah daring kepada ka. Prodi</li>
-            <li>Link Presentasi mahasiswa (jika ada): -</li>
-            <li>Link rekaman (jika ada): -</li>
-        </ol>
-    </div>
-
-    <div class="footer">
-        <!-- tanggal di sebelah kanan -->
-        <div class="signature-wrapper">
-            <div class="signature-box">
-                <p style="margin: 5px 0;">
-                    Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
-                </p>
-
-                <p class="signature-label" style="margin-top: 20px; margin-bottom: 6px;">Dosen Pengampu</p>
-
-                @if($jadwal->dosen->tanda_tangan)
-                    <img src="{{ $jadwal->dosen->tanda_tangan }}"
-                         alt="Tanda Tangan"
-                         class="signature-img">
-                @else
-                    <!-- placeholder agar tinggi tetap konsisten -->
-                    <span class="signature-placeholder" aria-hidden="true"></span>
-                @endif
-
-                <div class="signature-line">
-                    <strong style="display:block;">{{ $jadwal->dosen->nama }}</strong>
-                    <span style="font-size: 11px; font-weight: normal; display:block; margin-top:4px;">
-                        NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top: 30px; text-align: center; font-size: 10px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;">
-            <p>Halaman 1</p>
-        </div>
-    </div>
-
     <!-- Dokumentasi Perkuliahan -->
     @if($jadwal->dokumentasi && count($jadwal->dokumentasi) > 0)
-        <div class="page-break"></div>
-
-        <div class="header">
-            <h1>LAPORAN PERKULIAHAN DARING</h1>
-        </div>
-
-        <h3 style="margin-top: 20px; margin-bottom: 20px; color: #333; text-align: center;">
+        <h3 style="margin-top: 30px; margin-bottom: 20px; color: #333; text-align: center;">
             DOKUMENTASI PERKULIAHAN
         </h3>
 
@@ -395,11 +342,48 @@
                 </div>
             @endforeach
         </div>
-
-        <div style="margin-top: 30px; text-align: center; font-size: 10px; color: #999; border-top: 1px solid #ddd; padding-top: 15px;">
-            <p>Halaman 2</p>
-        </div>
     @endif
+
+    <!-- Catatan -->
+    <div style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid #4CAF50;">
+        <h4 style="margin-top: 0;">Catatan:</h4>
+        <ol style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
+            <li>Dosen menyediakan link zoom perkuliahan dan mengundang mahasiswa dalam perkuliahan daring</li>
+            <li>Perkuliahan direkam (jika bisa) dan tangkap layar untuk dokumentasi</li>
+            <li>Perkuliahan dilaksanakan sesuai waktu kuliah luring atau disesuaikan dengan situasi</li>
+            <li>Dosen dapat mengisikan absensi pada BAP sesuai jam kuliah masing-masing</li>
+            <li>Dosen mengumpulkan pelaporan kuliah daring kepada ka. Prodi</li>
+            <li>Link Presentasi mahasiswa (jika ada): -</li>
+            <li>Link rekaman (jika ada): -</li>
+        </ol>
+    </div>
+
+    <div class="footer" style="text-align: center; margin-top: 40px;">
+        <h4 style="margin-bottom: 10px;">Tanggal & Tanda Tangan Dosen</h4>
+        <p style="margin: 5px 0;">
+            Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
+        </p>
+
+        <p class="signature-label" style="margin-top: 20px; margin-bottom: 6px;">Dosen Pengampu</p>
+
+        @if($jadwal->dosen->tanda_tangan)
+            <div style="display: flex; justify-content: center; margin: 10px 0;">
+                <img src="{{ $jadwal->dosen->tanda_tangan }}"
+                     alt="Tanda Tangan"
+                     style="max-width: 350px; max-height: 200px; object-fit: contain;">
+            </div>
+        @else
+            <!-- placeholder agar tinggi tetap konsisten -->
+            <span style="display: inline-block; height: 200px;" aria-hidden="true"></span>
+        @endif
+
+        <div style="margin-top: 10px;">
+            <strong style="display:block;">{{ $jadwal->dosen->nama }}</strong>
+            <span style="font-size: 11px; font-weight: normal; display:block; margin-top:4px;">
+                NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
+            </span>
+        </div>
+    </div>
 
     <script>
         // Auto print jika ada parameter print

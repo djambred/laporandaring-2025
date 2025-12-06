@@ -9,12 +9,17 @@ class JadwalController extends Controller
 {
     public function downloadPdf(Jadwal $jadwal)
     {
-        // Load relasi yang diperlukan
+        // Load relasi dengan sorting berdasarkan NPM
         $jadwal->load([
             'matakuliah',
             'programstudi',
             'dosen',
-            'absensis.mahasiswa'
+            'absensis' => function ($query) {
+                $query->with('mahasiswa')
+                      ->join('mahasiswas', 'absensis.mahasiswa_id', '=', 'mahasiswas.id')
+                      ->orderByRaw('CAST(mahasiswas.npm AS UNSIGNED) ASC')
+                      ->select('absensis.*');
+            }
         ]);
 
         // Hitung statistik
