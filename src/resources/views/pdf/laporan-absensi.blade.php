@@ -419,22 +419,22 @@
             Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
         </p>
 
-        <p class="signature-label" style="margin-top: 20px; margin-bottom: 6px;">Dosen Pengampu</p>
+        <p style="margin-top: 30px; margin-bottom: 10px; font-weight: bold;">Dosen Pengampu</p>
 
         @if($jadwal->dosen->tanda_tangan)
-            <div style="display: flex; justify-content: center; margin: 10px 0;">
+            <div style="display: flex; justify-content: center; margin: 15px 0;">
                 <img src="{{ $jadwal->dosen->tanda_tangan }}"
                      alt="Tanda Tangan"
-                     style="max-width: 350px; max-height: 200px; object-fit: contain;">
+                     style="max-width: 450px; max-height: 250px; object-fit: contain;">
             </div>
         @else
             <!-- placeholder agar tinggi tetap konsisten -->
-            <span style="display: inline-block; height: 200px;" aria-hidden="true"></span>
+            <div style="height: 250px; display: inline-block;"></div>
         @endif
 
-        <div style="margin-top: 10px;">
-            <strong style="display:block;">{{ $jadwal->dosen->nama }}</strong>
-            <span style="font-size: 11px; font-weight: normal; display:block; margin-top:4px;">
+        <div style="margin-top: 15px; border-top: 2px solid #000; display: inline-block; padding-top: 8px; min-width: 300px;">
+            <strong style="display:block; font-size: 14px;">{{ $jadwal->dosen->nama }}</strong>
+            <span style="font-size: 12px; font-weight: normal; display:block; margin-top:5px;">
                 NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
             </span>
         </div>
