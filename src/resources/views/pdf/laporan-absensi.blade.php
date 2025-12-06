@@ -298,17 +298,17 @@
     </div>
 
     <div class="footer">
-        <div style="text-align: right; margin-top: 40px; margin-right: 80px;">
+        <div style="text-align: right; margin-top: 40px; margin-right: 50px;">
             <p style="margin: 5px 0;">Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</p>
-            <p style="margin-top: 20px; margin-bottom: 20px;">Dosen Pengampu</p>
-            <div style="height: 250px; width: 450px; margin-bottom: 10px; margin-left: auto; display: flex; align-items: center; justify-content: center;">
-                @if($jadwal->dosen->tanda_tangan)
+            <p style="margin-top: 20px; margin-bottom: 10px;">Dosen Pengampu</p>
+            @if($jadwal->dosen->tanda_tangan)
+                <div style="margin: 20px 0; text-align: right;">
                     <img src="{{ $jadwal->dosen->tanda_tangan }}"
                          alt="Tanda Tangan"
-                         style="width: 100%; height: 100%; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">
-                @endif
-            </div>
-            <div style="border-top: 1px solid #000; padding-top: 5px; display: inline-block; min-width: 200px;">
+                         style="max-width: 350px; max-height: 200px; width: auto; height: auto; display: inline-block;">
+                </div>
+            @endif
+            <div style="border-top: 1px solid #000; padding-top: 5px; display: inline-block; min-width: 250px; text-align: center;">
                 <strong>{{ $jadwal->dosen->nama }}</strong><br>
                 <span style="font-size: 11px; font-weight: normal;">NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}</span>
             </div>
