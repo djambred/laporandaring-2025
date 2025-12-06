@@ -388,10 +388,6 @@
                 </td>
             </tr>
         </table>
-
-        <div style="text-align: center; margin-top: 10px;">
-            <p style="font-size: 12px; color: #666;">Halaman 2</p>
-        </div>
     @endif
 
     <!-- Page Break untuk Halaman 3 -->
@@ -443,8 +439,6 @@
                 NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
             </span>
         </div>
-
-        <p style="font-size: 12px; color: #666; margin-top: 30px;">Halaman 3</p>
     </div>
 
     <script>
