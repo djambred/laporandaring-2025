@@ -12,6 +12,8 @@ class Jadwal extends Model
 
     protected $casts = [
         'tanggal' => 'date',
+        'dokumentasi' => 'array',
+        'is_active' => 'boolean',
     ];
 
     public function dosen(): BelongsTo

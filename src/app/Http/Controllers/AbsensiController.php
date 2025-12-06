@@ -10,22 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class AbsensiController extends Controller
 {
-    public function index()
-    {
-        // Tampilkan jadwal hari ini yang tersedia untuk absensi
-        $jadwals = Jadwal::with(['matakuliah', 'programstudi', 'dosen'])
-            ->whereDate('tanggal', today())
-            ->orderBy('jam')
-            ->get();
-
-        return view('absensi.index', compact('jadwals'));
-    }
-
-    public function create(Jadwal $jadwal)
-    {
-        return view('absensi.create', compact('jadwal'));
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -62,14 +46,14 @@ class AbsensiController extends Controller
             Absensi::create([
                 'jadwal_id' => $validated['jadwal_id'],
                 'mahasiswa_id' => $mahasiswa->id,
-                'status' => 'hadir',
+                'status' => $request->input('status', 'hadir'),
                 'waktu_absen' => now(),
                 'keterangan' => $validated['keterangan'],
                 'foto_absen' => $fotoPath,
                 'lokasi' => $request->input('lokasi'), // GPS dari browser
             ]);
 
-            return redirect()->route('absensi.index')->with('success', 'Absensi berhasil dicatat!');
+            return redirect('/')->with('success', 'Absensi berhasil dicatat!');
 
         } catch (\Exception $e) {
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
@@ -90,7 +74,7 @@ class AbsensiController extends Controller
             return view('absensi.riwayat')->with('error', 'NPM tidak ditemukan!');
         }
 
-        $absensis = Absensi::with(['jadwal.matakuliah', 'jadwal.dosen'])
+        $absensis = Absensi::with(['jadwal.matakuliah', 'jadwal.dosen', 'jadwal.programstudi'])
             ->where('mahasiswa_id', $mahasiswa->id)
             ->orderBy('created_at', 'desc')
             ->paginate(20);

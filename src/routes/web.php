@@ -19,13 +19,20 @@ Livewire::setScriptRoute(function ($handle) {
 / END
 */
 Route::get('/', function () {
-    return view('welcome');
+    $jadwals = \App\Models\Jadwal::with(['matakuliah', 'dosen', 'programstudi'])
+        ->where('is_active', true)
+        ->orderBy('tanggal', 'desc')
+        ->orderBy('jam', 'asc')
+        ->get();
+
+    return view('welcome', compact('jadwals'));
 });
 
 // Absensi Routes (Public - untuk mahasiswa)
 Route::prefix('absensi')->name('absensi.')->group(function () {
-    Route::get('/', [App\Http\Controllers\AbsensiController::class, 'index'])->name('index');
-    Route::get('/create/{jadwal}', [App\Http\Controllers\AbsensiController::class, 'create'])->name('create');
     Route::post('/store', [App\Http\Controllers\AbsensiController::class, 'store'])->name('store');
     Route::get('/riwayat', [App\Http\Controllers\AbsensiController::class, 'riwayat'])->name('riwayat');
 });
+
+// Jadwal Routes (untuk download PDF laporan)
+Route::get('/jadwal/{jadwal}/download-pdf', [App\Http\Controllers\JadwalController::class, 'downloadPdf'])->name('jadwal.download-pdf');
