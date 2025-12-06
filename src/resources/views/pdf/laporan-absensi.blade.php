@@ -402,7 +402,7 @@
     <!-- Catatan -->
     <div style="margin-top: 30px; padding: 15px; background: #f9f9f9; border-left: 4px solid;">
         <h4 style="margin-top: 0;">Catatan:</h4>
-        <ol style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
+        <ol style="margin: 10px 0; padding-left: 20px; line-height: 0;">
             <li>Dosen menyediakan link zoom perkuliahan dan mengundang mahasiswa dalam perkuliahan daring</li>
             <li>Perkuliahan direkam (jika bisa) dan tangkap layar untuk dokumentasi</li>
             <li>Perkuliahan dilaksanakan sesuai waktu kuliah luring atau disesuaikan dengan situasi</li>
