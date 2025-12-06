@@ -302,10 +302,10 @@
             <p style="margin: 5px 0;">Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}</p>
             <p style="margin-top: 20px; margin-bottom: 10px;">Dosen Pengampu</p>
             @if($jadwal->dosen->tanda_tangan)
-                <div style="margin: 20px 0; text-align: center;">
+                <div style="margin: 20px 0; text-align: right;">
                     <img src="{{ $jadwal->dosen->tanda_tangan }}"
                          alt="Tanda Tangan"
-                         style="max-width: 350px; max-height: 200px; width: auto; height: auto; display: inline-block;">
+                         style="max-width: 350px; max-height: 500px; width: auto; height: auto; display: inline-block;">
                 </div>
             @endif
             <div style="border-top: 1px solid #000; padding-top: 5px; display: inline-block; min-width: 250px; text-align: center;">
