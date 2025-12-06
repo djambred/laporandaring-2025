@@ -27,9 +27,30 @@ class AbsensisRelationManager extends RelationManager
                 Forms\Components\Select::make('mahasiswa_id')
                     ->label('Mahasiswa')
                     ->relationship('mahasiswa', 'nama')
-                    ->searchable()
+                    ->searchable(['nama', 'npm'])
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->npm ? "{$record->nama} ({$record->npm})" : $record->nama)
                     ->preload()
-                    ->required(),
+                    ->required()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nama')
+                            ->label('Nama Mahasiswa')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('npm')
+                            ->label('NPM (Opsional)')
+                            ->unique('mahasiswas', 'npm')
+                            ->maxLength(255)
+                            ->placeholder('Kosongkan jika tidak ada'),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email')
+                            ->email()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('no_hp')
+                            ->label('No. HP')
+                            ->tel()
+                            ->maxLength(255),
+                    ])
+                    ->createOptionModalHeading('Tambah Mahasiswa Baru'),
                 Forms\Components\Select::make('status')
                     ->label('Status')
                     ->options([
