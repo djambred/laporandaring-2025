@@ -414,30 +414,29 @@
     </div>
 
     <!-- Tanda Tangan -->
-    <div class="footer" style="text-align: center; margin-top: 50px;">
-        <p style="margin-bottom: 40px; font-size: 13px;">
+    <div class="footer" style="text-align: center; margin-top: 40px;">
+        <p style="margin: 5px 0;">
             Lubuk Alung, {{ $jadwal->tanggal->locale('id')->isoFormat('dddd, DD MMMM YYYY') }}
         </p>
 
-        <div style="display: inline-block; text-align: center;">
-            <p style="margin: 0 0 20px 0; font-weight: normal;">Dosen Pengampu</p>
+        <p class="signature-label" style="margin-top: 20px; margin-bottom: 6px;">Dosen Pengampu</p>
 
-            @if($jadwal->dosen->tanda_tangan)
-                <div style="margin: 20px 0; min-height: 120px; display: flex; align-items: center; justify-content: center;">
-                    <img src="{{ $jadwal->dosen->tanda_tangan }}"
-                         alt="Tanda Tangan"
-                         style="max-width: 400px; max-height: 120px; object-fit: contain;">
-                </div>
-            @else
-                <div style="height: 120px;"></div>
-            @endif
-
-            <div style="border-top: 1px solid #000; padding-top: 5px; margin-top: 10px; min-width: 250px;">
-                <strong style="display: block; font-size: 13px;">{{ $jadwal->dosen->nama }}</strong>
-                <span style="font-size: 11px; display: block; margin-top: 3px;">
-                    NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
-                </span>
+        @if($jadwal->dosen->tanda_tangan)
+            <div style="display: flex; justify-content: center; margin: 10px 0;">
+                <img src="{{ $jadwal->dosen->tanda_tangan }}"
+                     alt="Tanda Tangan"
+                     style="max-width: 350px; max-height: 200px; object-fit: contain;">
             </div>
+        @else
+            <!-- placeholder agar tinggi tetap konsisten -->
+            <span style="display: inline-block; height: 200px;" aria-hidden="true"></span>
+        @endif
+
+        <div style="margin-top: 10px;">
+            <strong style="display:block;">{{ $jadwal->dosen->nama }}</strong>
+            <span style="font-size: 11px; font-weight: normal; display:block; margin-top:4px;">
+                NIDN. {{ $jadwal->dosen->nidn ?? '0021065303' }}
+            </span>
         </div>
     </div>
 
